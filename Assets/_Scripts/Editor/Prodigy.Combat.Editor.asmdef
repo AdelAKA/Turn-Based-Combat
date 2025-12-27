@@ -1,0 +1,18 @@
+{
+    "name": "Prodigy.Combat.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0f0ddaef80200945ac4e4b3e234b2c1"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

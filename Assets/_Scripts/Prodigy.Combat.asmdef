@@ -1,0 +1,19 @@
+{
+    "name": "Prodigy.Combat",
+    "rootNamespace": "GP7.Prodigy.Combat",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:7c88a4a7926ee5145ad2dfa06f454c67",
+        "GUID:1d82bdf40e2465b44b34adf79595e74c",
+        "GUID:d525ad6bd40672747bde77962f1c401e"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

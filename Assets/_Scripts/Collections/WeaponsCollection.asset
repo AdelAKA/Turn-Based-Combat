@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 547b9f2bd58f40346a8a502af6c0800f, type: 3}
+  m_Name: WeaponsCollection
+  m_EditorClassIdentifier: 
+  Weapons:
+  - name: Warrior Sword
+    identifier: 0
+    type: 0
+    damage: 10
+    skillNames: 000000000200000003000000
+  - name: Claw
+    identifier: 1
+    type: 0
+    damage: 3
+    skillNames: 0800000009000000
+  - name: Curse
+    identifier: 2
+    type: 1
+    damage: 8
+    skillNames: 010000000a0000000d000000
+  - name: Hedge Hammer
+    identifier: 3
+    type: 0
+    damage: 10
+    skillNames: 00000000090000000b000000
+  - name: Barbarian Sword
+    identifier: 4
+    type: 0
+    damage: 10
+    skillNames: 000000000200000003000000
+  - name: War Crossbow
+    identifier: 5
+    type: 1
+    damage: 10
+    skillNames: 010000000400000005000000
+  - name: Axe Of Steel
+    identifier: 6
+    type: 1
+    damage: 10
+    skillNames: 00000000060000000c000000
