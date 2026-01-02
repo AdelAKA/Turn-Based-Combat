@@ -27,6 +27,7 @@ namespace GP7.Prodigy.Combat
     [Serializable]
     public class HealthConditionTrigger : TriggerCondition
     {
+        [Range(0,1)]
         public float HealthTriggerPercentage;
 
         private float _fighterMaxHealth;

@@ -20,8 +20,9 @@ namespace GP7.Prodigy.Combat
             OffHandName heldOffHand,
             List<SkillName> skillNames,
             List<PassiveSkillsCollection.PassiveSkillInfo> passiveSkillInfoList,
-            List<QuickActionsCollection.QuickActionInfo> quickActionInfoList)
-            : base(index, position, isLocalPlayer, maxHP, maxMP, speed, damage, offHandStats, heldWeapon, heldOffHand, skillNames, passiveSkillInfoList, quickActionInfoList)
+            List<QuickActionsCollection.QuickActionInfo> quickActionInfoList,
+            SkillsCollection skillsCollection)
+            : base(index, position, isLocalPlayer, maxHP, maxMP, speed, damage, offHandStats, heldWeapon, heldOffHand, skillNames, passiveSkillInfoList, quickActionInfoList, skillsCollection)
         {
             Name = monsterName.ToString();
             MonsterNameReference = monsterName;
@@ -34,7 +35,7 @@ namespace GP7.Prodigy.Combat
             List<SkillsCollection.SkillInfo> possibleSkills = new List<SkillsCollection.SkillInfo>();
             for (int i = 0; i < SkillNames.Count; i++)
             {
-                SkillsCollection.SkillInfo skillInfo = OfflineCombatManager.Instance.skillsCollection.GetSkillByIdentifier(SkillNames[i]);
+                SkillsCollection.SkillInfo skillInfo = skillsCollection.GetSkillByIdentifier(SkillNames[i]);
                 //Debug.Log($"{skillInfo.name}: ({CurrentMana}, {skillInfo.requiredMP})");
                 if (CurrentMana >= skillInfo.requiredMP)
                     possibleSkills.Add(skillInfo);

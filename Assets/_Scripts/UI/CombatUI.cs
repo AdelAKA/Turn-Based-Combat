@@ -28,10 +28,6 @@ namespace GP7.Prodigy.Combat
         [SerializeField] private Image skillicon;
         [SerializeField] private TMP_Text skillNameText;
         [SerializeField] private TMP_Text skillInfoText;
-        //[SerializeField] private TMP_Text skillDamageText;
-        //[SerializeField] private TMP_Text skillCostText;
-        //[SerializeField] private TMP_Text SkillTargetText;
-        //[SerializeField] private TMP_Text SkillAOEText;
 
         [Header("Turns Tab")]
         [SerializeField] private CharacterPortrait currentFighterIconHolder;
@@ -109,10 +105,6 @@ namespace GP7.Prodigy.Combat
                         skillicon.sprite = selectedButton.VisualInfo.icon;
                         skillNameText.text = selectedButton.VisualInfo.name;
                         skillInfoText.text = selectedButton.VisualInfo.description;
-                        //skillDamageText.text = "Damage: " + selectedButton.ReferencedSkillInfo.values[0].ToString();
-                        //skillCostText.text = "Mp Cost: " + selectedButton.ReferencedSkillInfo.requiredMP.ToString();
-                        //SkillTargetText.text = "Target: " + selectedButton.ReferencedSkillInfo.targetType.ToString();
-                        //SkillAOEText.text = "AOE: " + selectedButton.ReferencedSkillInfo.aoe.ToString();
                         skillinfoContainer.SetActive(true);
                     }
                 }

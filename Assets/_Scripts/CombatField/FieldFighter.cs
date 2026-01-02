@@ -172,8 +172,6 @@ namespace GP7.Prodigy.Combat
                 newPos.x += 1;
             else
                 newPos.x -= 1;
-            //newPos.x += isFacingRight ? 1 : -1;
-            //Debug.Log(newPos);
             spriteRenderer.transform.DOLocalMoveX(newPos.x, 0.5f).SetEase(Ease.OutCirc)
                 .OnComplete(() =>
                 {
@@ -193,8 +191,6 @@ namespace GP7.Prodigy.Combat
                 newPos.x += 1;
             else
                 newPos.x -= 1;
-            //newPos.x += isFacingRight ? 1 : -1;
-            //Debug.Log(newPos);
             spriteRenderer.transform.DOLocalMoveX(newPos.x, 0.5f).SetEase(Ease.OutCirc)
                 .OnComplete(() =>
                 {

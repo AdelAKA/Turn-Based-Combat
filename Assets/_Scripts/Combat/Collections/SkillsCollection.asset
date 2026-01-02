@@ -21,16 +21,16 @@ MonoBehaviour:
     targetType: 2
     aoe: 3
     effects:
-    - rid: 9148782840227561632
+    - rid: 7385112370287476844
   - name: Ranged Auto Attack
     identifier: 1
-    icon: {fileID: 21300000, guid: 4fbd6724df5f54845ad1851106e4df7a, type: 3}
-    skillEffect: {fileID: 7954150357244396647, guid: c6643dfbd91c7c546906efd4b02918b9, type: 3}
+    icon: {fileID: 21300000, guid: dbef0a76fe3974542888e09e324d1836, type: 3}
+    skillEffect: {fileID: 3735791836860053781, guid: 710ec9c30f2712d41a202472189659c6, type: 3}
     requiredMP: 0
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561633
+    - rid: 7385112370287476845
   - name: Sweeping Edge
     identifier: 2
     icon: {fileID: 21300000, guid: 5eb913e17c82e75469d2681631331b0a, type: 3}
@@ -39,7 +39,7 @@ MonoBehaviour:
     targetType: 2
     aoe: 4
     effects:
-    - rid: 9148782865100570716
+    - rid: 7385112370287476846
   - name: Repeated Slash
     identifier: 3
     icon: {fileID: 21300000, guid: 3fde223c66cc64a44a64cc7e37f15b84, type: 3}
@@ -48,8 +48,8 @@ MonoBehaviour:
     targetType: 2
     aoe: 3
     effects:
-    - rid: 9148782840227561635
-    - rid: 2437147401446228086
+    - rid: 7385112370287476847
+    - rid: 7385112370287476848
   - name: Power Shot
     identifier: 4
     icon: {fileID: 21300000, guid: 8e3b17b8d47c3e042ba87793b37ac03a, type: 3}
@@ -58,7 +58,7 @@ MonoBehaviour:
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561636
+    - rid: 7385112370287476849
   - name: Barrage
     identifier: 5
     icon: {fileID: 21300000, guid: 6b03ba58783d0214685fb8bd31718939, type: 3}
@@ -67,7 +67,7 @@ MonoBehaviour:
     targetType: 3
     aoe: 2
     effects:
-    - rid: 9148782840227561637
+    - rid: 7385112370287476850
   - name: Axe Throw
     identifier: 6
     icon: {fileID: 21300000, guid: 69d04c8c658765041b34f784e234de3c, type: 3}
@@ -76,7 +76,7 @@ MonoBehaviour:
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561638
+    - rid: 7385112370287476851
   - name: Throw Knife
     identifier: 7
     icon: {fileID: 21300000, guid: d6c19bd7836b3864ca366bf5ec8661bb, type: 3}
@@ -85,7 +85,7 @@ MonoBehaviour:
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561639
+    - rid: 7385112370287476852
   - name: Skratch
     identifier: 8
     icon: {fileID: 21300000, guid: 3c17ecb30cfea446a96f5d18fc830bbc, type: 3}
@@ -94,7 +94,7 @@ MonoBehaviour:
     targetType: 2
     aoe: 0
     effects:
-    - rid: 9148782840227561640
+    - rid: 7385112370287476853
   - name: Fireball
     identifier: 9
     icon: {fileID: 21300000, guid: 01f2186641de8fb4bac40b2be68d0311, type: 3}
@@ -103,16 +103,16 @@ MonoBehaviour:
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561641
+    - rid: 7385112370287476854
   - name: Spit
     identifier: 10
     icon: {fileID: 21300000, guid: 731ee27414650f24a8d4db87172ad59f, type: 3}
-    skillEffect: {fileID: 1640216190700580467, guid: 799893a4651c2bd4ea783b7924d2308d, type: 3}
+    skillEffect: {fileID: 1775286066613961062, guid: 73652a114af4df84490a8fc30a789ce2, type: 3}
     requiredMP: 2
     targetType: 3
     aoe: 0
     effects:
-    - rid: 2437147401446228084
+    - rid: 7385112370287476855
   - name: Burn
     identifier: 11
     icon: {fileID: 21300000, guid: db2ce8c86a6ed794086c072ae08aade8, type: 3}
@@ -121,8 +121,8 @@ MonoBehaviour:
     targetType: 3
     aoe: 0
     effects:
-    - rid: 9148782840227561643
-    - rid: 2437147401446228088
+    - rid: 7385112370287476856
+    - rid: 7385112370287476857
   - name: WarCry
     identifier: 12
     icon: {fileID: 21300000, guid: f952eb5cb375c2e43a0aa58564a467be, type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
     targetType: 1
     aoe: 0
     effects:
-    - rid: 2437147401446228089
+    - rid: 7385112370287476858
   - name: UltimateHeal
     identifier: 13
     icon: {fileID: 21300000, guid: 4ed8e3e1f3981a746a97aa141e43b951, type: 3}
@@ -140,7 +140,7 @@ MonoBehaviour:
     targetType: 1
     aoe: 1
     effects:
-    - rid: 9148782840227561647
+    - rid: 7385112370287476859
   - name: Wrap Wound
     identifier: 14
     icon: {fileID: 21300000, guid: 3db49e38f184c904eab0f772cc536671, type: 3}
@@ -149,130 +149,130 @@ MonoBehaviour:
     targetType: 1
     aoe: 0
     effects:
-    - rid: 9148782840227561648
+    - rid: 7385112370287476860
   references:
     version: 2
     RefIds:
-    - rid: 2437147401446228084
-      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 3
-        effectSummery: Apply Poison for 4 turns
-        stats: 2
-        numberOfTurns: 4
-        value: 8
-    - rid: 2437147401446228086
-      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 3
-        effectSummery: Stun target
-        stats: 1
-        numberOfTurns: 1
-        value: 0
-    - rid: 2437147401446228088
-      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 3
-        effectSummery: Apply Burn for 2 turns
-        stats: 3
-        numberOfTurns: 2
-        value: 10
-    - rid: 2437147401446228089
-      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 3
-        effectSummery: Boost Damage by 120%
-        stats: 4
-        numberOfTurns: 3
-        value: 0.2
-    - rid: 9148782840227561632
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476844
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
         Type: 1
         effectSummery: Deal Damage
         calculationType: 0
         value: 1
-    - rid: 9148782840227561633
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476845
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
-        Type: 1
+        Type: 0
         effectSummery: Deal Damage
         calculationType: 0
         value: 1
-    - rid: 9148782840227561635
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal 50% Damage
-        calculationType: 0
-        value: 0.5
-    - rid: 9148782840227561636
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal 150% Damage
-        calculationType: 0
-        value: 1.5
-    - rid: 9148782840227561637
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal 200% Damage
-        calculationType: 0
-        value: 2
-    - rid: 9148782840227561638
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal 130% damage
-        calculationType: 0
-        value: 1.3
-    - rid: 9148782840227561639
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal Offhand Damage + 20
-        calculationType: 4
-        value: 20
-    - rid: 9148782840227561640
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal Damage
-        calculationType: 0
-        value: 1
-    - rid: 9148782840227561641
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal 150% Damage
-        calculationType: 0
-        value: 1.5
-    - rid: 9148782840227561643
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 1
-        effectSummery: Deal Damage
-        calculationType: 0
-        value: 0.2
-    - rid: 9148782840227561647
-      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 2
-        effectSummery: Heal All Allies
-        calculationType: 2
-        value: 30
-    - rid: 9148782840227561648
-      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 2
-        effectSummery: Heal By Percentage
-        calculationType: 3
-        value: 0.5
-    - rid: 9148782865100570716
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476846
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
         Type: 1
         effectSummery: Deal 125% Damage
         calculationType: 0
         value: 1.25
+    - rid: 7385112370287476847
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 50% Damage
+        calculationType: 0
+        value: 0.5
+    - rid: 7385112370287476848
+      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 3
+        effectSummery: Stun Target
+        stats: 1
+        numberOfTurns: 1
+        value: 0
+    - rid: 7385112370287476849
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 150% Damage
+        calculationType: 0
+        value: 1.5
+    - rid: 7385112370287476850
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 200% Damage
+        calculationType: 0
+        value: 2
+    - rid: 7385112370287476851
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 130% Damage
+        calculationType: 0
+        value: 1.3
+    - rid: 7385112370287476852
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal Offhand Damage +20
+        calculationType: 4
+        value: 20
+    - rid: 7385112370287476853
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal Damage
+        calculationType: 0
+        value: 1
+    - rid: 7385112370287476854
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 150% Damage
+        calculationType: 0
+        value: 1.5
+    - rid: 7385112370287476855
+      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 3
+        effectSummery: Apply Poison for 4 Turns
+        stats: 2
+        numberOfTurns: 4
+        value: 8
+    - rid: 7385112370287476856
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 1
+        effectSummery: Deal 20% Damage
+        calculationType: 0
+        value: 0.2
+    - rid: 7385112370287476857
+      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 3
+        effectSummery: Apply Burn for 2 Turns
+        stats: 3
+        numberOfTurns: 2
+        value: 10
+    - rid: 7385112370287476858
+      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 3
+        effectSummery: Boost Damage by 20%
+        stats: 4
+        numberOfTurns: 3
+        value: 0.2
+    - rid: 7385112370287476859
+      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 2
+        effectSummery: 'Heal By 50% '
+        calculationType: 3
+        value: 0.5
+    - rid: 7385112370287476860
+      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 2
+        effectSummery: Heal by 50
+        calculationType: 2
+        value: 50

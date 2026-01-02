@@ -19,7 +19,7 @@ MonoBehaviour:
     aoe: 0
     startCount: 5
     effect:
-      rid: 9148782840227561629
+      rid: 7385112370287476861
     icon: {fileID: 21300000, guid: 3fa85f729392c1e449f968043272cff1, type: 3}
     skillEffect: {fileID: 8089440106378899875, guid: ad57c3097a6ee6a42b6b2ff993015a9c, type: 3}
   - name: Healing Potion
@@ -28,7 +28,7 @@ MonoBehaviour:
     aoe: 0
     startCount: 2
     effect:
-      rid: 9148782840227561630
+      rid: 7385112370287476862
     icon: {fileID: 21300000, guid: 23e18ce949402024f996be74d008500a, type: 3}
     skillEffect: {fileID: 950333163885789142, guid: 9f1fcd62901fcde4ab4e13602a0a86e1, type: 3}
   - name: Damage Boost Potion
@@ -37,31 +37,31 @@ MonoBehaviour:
     aoe: 0
     startCount: 2
     effect:
-      rid: 2437147401446228090
+      rid: 7385112370287476863
     icon: {fileID: 21300000, guid: d48b8706969481744b4461e77cf5a7af, type: 3}
     skillEffect: {fileID: 7056016612257667861, guid: c44fab83a236f9642b3cb1e6f5ba11e5, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 2437147401446228090
-      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
-      data:
-        Type: 3
-        effectSummery: Boost damage by 120%
-        stats: 4
-        numberOfTurns: 2
-        value: 0.2
-    - rid: 9148782840227561629
-      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476861
+      type: {class: DamageEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
         Type: 1
         effectSummery: Deal Damage
         calculationType: 0
         value: 1
-    - rid: 9148782840227561630
-      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476862
+      type: {class: HealEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
         Type: 2
         effectSummery: Heal by 50
         calculationType: 2
         value: 50
+    - rid: 7385112370287476863
+      type: {class: StatusApplyingEffect, ns: GP7.Prodigy.Combat, asm: CombatStructure}
+      data:
+        Type: 3
+        effectSummery: Boost Damage by 20%
+        stats: 4
+        numberOfTurns: 2
+        value: 0.2

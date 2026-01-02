@@ -22,7 +22,18 @@ namespace GP7.Prodigy.Combat
         public int GetHeroIndex(Fighter hero) => _heros.IndexOf(hero);
         public int GetMonsterIndex(Fighter monster) => _monsters.IndexOf(monster);
 
-        public Combat(List<Fighter> heros, List<Fighter> monsters)
+        // Collections
+        private SkillsCollection skillsCollection;
+        private QuickActionsCollection quickActionsCollection;
+        private PassiveSkillsCollection passiveSkillsCollection;
+
+        public Combat(
+            List<Fighter> heros,
+            List<Fighter> monsters,
+            SkillsCollection skillsCollection,
+            QuickActionsCollection quickActionsCollection,
+            PassiveSkillsCollection passiveSkillsCollection
+            )
         {
             _heros = heros;
             _monsters = monsters;
@@ -36,6 +47,10 @@ namespace GP7.Prodigy.Combat
                 turnQueue.Enqueue(fighter);
 
             CurrentCombatResult = CombatResult.NotDecided;
+
+            this.skillsCollection = skillsCollection;
+            this.quickActionsCollection = quickActionsCollection;
+            this.passiveSkillsCollection = passiveSkillsCollection;
         }
 
         public void SwitchFighter()
@@ -47,29 +62,14 @@ namespace GP7.Prodigy.Combat
             } while (CurrentFighterTurn.IsDead);
 
             CurrentFighterTurn.OnNewTurn();
-            //CurrentCombatState = CombatState.CheckingStats;
         }
-
-        //public (bool, string) CheckIfWeaponMoveValid(int initiatorIndex, bool isHero, CombatMove move)
-        //{
-        //    Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
-
-        //    List<Fighter> targetFighters = new List<Fighter>();
-        //    move.targetHeroIndexes.ForEach(i => targetFighters.Add(_heros[i]));
-        //    move.targetMonsterIndexes.ForEach(i => targetFighters.Add(_monsters[i]));
-
-        //    if (!CheckIfCurrentFighterTurn(initiator)) return (false, $"not the fighters turn");
-        //    //if (!CheckIfWeaponTargetIsValid(initiator.HeldWeapon, targetFighters)) return (false, $"target not valid");
-
-        //    return (true, "Valid");
-        //}
 
         public (bool, string) CheckIfMoveValid(int initiatorIndex, bool isHero, CombatMove move)
         {
             Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
             SkillName chosenSkill = initiator.SkillNames[move.skillIndex];
 
-            SkillsCollection.SkillInfo skillInfo = OfflineCombatManager.Instance.skillsCollection.GetSkillByIdentifier(chosenSkill);
+            SkillsCollection.SkillInfo skillInfo = skillsCollection.GetSkillByIdentifier(chosenSkill);
             if (skillInfo == null) return (false, $"no info on skill {chosenSkill}");
 
             Fighter targetedFighter = move.targetHeroIndex != -1 ? _heros[move.targetHeroIndex] : _monsters[move.targetMonsterIndex];
@@ -87,7 +87,7 @@ namespace GP7.Prodigy.Combat
             Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
             QuickActionName chosenQuickAction = initiator.QuickActions[move.quickActionIndex].QuickActionName;
 
-            QuickActionsCollection.QuickActionInfo quckActionInfo = OfflineCombatManager.Instance.quickActionsCollection.GetQuickActionByIdentifier(chosenQuickAction);
+            QuickActionsCollection.QuickActionInfo quckActionInfo = quickActionsCollection.GetQuickActionByIdentifier(chosenQuickAction);
             if (quckActionInfo == null) return (false, $"no info on quick action {chosenQuickAction}");
 
             Fighter targetedFighter = move.targetHeroIndex != -1 ? _heros[move.targetHeroIndex] : _monsters[move.targetMonsterIndex];
@@ -107,11 +107,8 @@ namespace GP7.Prodigy.Combat
         private bool CheckIfSkillTargetIsValid(SkillTargetType chosenSkillTargetType, Fighter target) => GetTargetableFighters(chosenSkillTargetType).Contains(target);
         private bool CheckIfFighterHasQuickAction(Fighter fighter, QuickActionName chosenQuickAction) => fighter.QuickActions.Any(q => q.QuickActionName == chosenQuickAction);
         private bool CheckIfFighterCanUseQuickAction(Fighter fighter) => !fighter.IsQuickActionUsed;
-        private bool CheckIfFighterHasEnoughQuickActions(Fighter fighter, QuickActionName chosenQuickAction)
-        {
-            QuickActionHandler targetQuickAction = fighter.QuickActions.FirstOrDefault(q => q.QuickActionName == chosenQuickAction);
-            return targetQuickAction.ItemCount > 0;
-        }
+        private bool CheckIfFighterHasEnoughQuickActions(Fighter fighter, QuickActionName chosenQuickAction) => fighter.CanConsume(chosenQuickAction);
+
 
         public List<Fighter> GetTargetableFighters(SkillTargetType skillTargetType)
         {
@@ -226,30 +223,13 @@ namespace GP7.Prodigy.Combat
             return affectedFighters;
         }
 
-        //public void ApplyWeaponMove(int initiatorIndex, bool isHero, CombatMove move)
-        //{
-        //    Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
-
-        //    List<Fighter> targetFighters = new List<Fighter>();
-        //    move.targetHeroIndexes.ForEach(i => targetFighters.Add(_heros[i]));
-        //    move.targetMonsterIndexes.ForEach(i => targetFighters.Add(_monsters[i]));
-
-        //    WeaponsCollection.WeaponInfo weaponInfo = OfflineCombatManager.Instance.weaponsCollection.GetWeaponByName(initiator.HeldWeapon);
-
-        //    foreach (Fighter target in targetFighters)
-        //    {
-        //        target.CurrentHP -= weaponInfo.damage; // TODO: multiply by character Power
-        //    }
-        //    CheckForCasualties();
-        //}
-
         public void ApplyMove(int initiatorIndex, bool isHero, CombatMove move)
         {
             Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
             Fighter targeted = move.targetHeroIndex != -1 ? _heros[move.targetHeroIndex] : _monsters[move.targetMonsterIndex];
             SkillName chosenSkill = initiator.SkillNames[move.skillIndex];
 
-            SkillsCollection.SkillInfo chosenSkillInfo = OfflineCombatManager.Instance.skillsCollection.GetSkillByIdentifier(chosenSkill);
+            SkillsCollection.SkillInfo chosenSkillInfo = skillsCollection.GetSkillByIdentifier(chosenSkill);
             initiator.CurrentMana -= chosenSkillInfo.requiredMP;
 
             // Basic skill will add 10% mana
@@ -271,21 +251,15 @@ namespace GP7.Prodigy.Combat
             CheckForCasualties();
         }
 
-        public void ApplyQuickAction(int initiatorIndex, bool isHero, CombatQuickActionMove quckActionMove)
+        public void ApplyQuickAction(int initiatorIndex, bool isHero, CombatQuickActionMove quickActionMove)
         {
             Fighter initiator = isHero ? _heros[initiatorIndex] : _monsters[initiatorIndex];
-            Fighter targeted = quckActionMove.targetHeroIndex != -1 ? _heros[quckActionMove.targetHeroIndex] : _monsters[quckActionMove.targetMonsterIndex];
-
+            Fighter targeted = quickActionMove.targetHeroIndex != -1 ? _heros[quickActionMove.targetHeroIndex] : _monsters[quickActionMove.targetMonsterIndex];
             // TODO: Only Heros can use quick actions
-            //if(initiator is HeroFighter heroFighter)
-            //{
 
-            //}
-            QuickActionHandler InvokedQuickAction = initiator.QuickActions[quckActionMove.quickActionIndex];
-            InvokedQuickAction.TryConsume();
-            initiator.IsQuickActionUsed = true;
+            QuickActionName invokedQuickAction = initiator.InvokeQuickAction(quickActionMove.quickActionIndex);
 
-            QuickActionsCollection.QuickActionInfo chosenQuickActionInfo = OfflineCombatManager.Instance.quickActionsCollection.GetQuickActionByIdentifier(InvokedQuickAction.QuickActionName);
+            QuickActionsCollection.QuickActionInfo chosenQuickActionInfo = quickActionsCollection.GetQuickActionByIdentifier(invokedQuickAction);
 
             List<Fighter> targetFighters = GetAffectedFighters(targeted, chosenQuickActionInfo.aoe);
 
@@ -299,28 +273,15 @@ namespace GP7.Prodigy.Combat
         public List<CombatPassiveMove> CheckForPassiveSkills()
         {
             List<CombatPassiveMove> combatPassiveMoves = new List<CombatPassiveMove>();
+
             for (int i = 0; i < _heros.Count; i++)
             {
-                var passiveSkills = _heros[i].PassiveSkills;
-                for (int j = 0; j < passiveSkills.Count; j++)
-                {
-                    if (passiveSkills[j].CheckCondition())
-                    {
-                        combatPassiveMoves.Add(new CombatPassiveMove(j, i, -1));
-                    }
-                }
+                combatPassiveMoves.AddRange(_heros[i].CheckForPassiveSkills());
             }
 
             for (int i = 0; i < _monsters.Count; i++)
             {
-                var passiveSkills = _monsters[i].PassiveSkills;
-                for (int j = 0; j < passiveSkills.Count; j++)
-                {
-                    if (passiveSkills[j].CheckCondition())
-                    {
-                        combatPassiveMoves.Add(new CombatPassiveMove(j, -1, i));
-                    }
-                }
+                combatPassiveMoves.AddRange(_monsters[i].CheckForPassiveSkills());
             }
             return combatPassiveMoves;
         }
@@ -330,24 +291,14 @@ namespace GP7.Prodigy.Combat
             foreach (var passiveMove in passiveMoves)
             {
                 Fighter initiator = passiveMove.targetHeroIndex >= 0 ? _heros[passiveMove.targetHeroIndex] : _monsters[passiveMove.targetMonsterIndex];
-                //Fighter targeted = move.targetHeroIndex != -1 ? _heros[move.targetHeroIndex] : _monsters[move.targetMonsterIndex];
-                PassiveSkillHandler invokedPassiveSkill = initiator.PassiveSkills[passiveMove.passiveSkillIndex];
-                invokedPassiveSkill.isInvoked = true;
+                PassiveSkillName invokedPassiveSkill = initiator.InvokePassiveSkill(passiveMove.passiveSkillIndex);
 
                 //WeaponsCollection.WeaponInfo weaponInfo = OfflineCombatManager.Instance.weaponsCollection.GetWeaponByIdentifier(initiator.HeldWeapon);
                 // TODO: Calculate skill values from weapon
 
-                PassiveSkillsCollection.PassiveSkillInfo invokedPassiveInfo = OfflineCombatManager.Instance.passiveSkillsCollection.GetPassiveSkillByIdentifier(invokedPassiveSkill.PassiveSkillName);
-                //initiator.CurrentHealth += invokedPassiveInfo.amount;
+                PassiveSkillsCollection.PassiveSkillInfo invokedPassiveInfo = passiveSkillsCollection.GetPassiveSkillByIdentifier(invokedPassiveSkill);
                 initiator.ApplyHeal(invokedPassiveInfo.amount);
-                //foreach (Fighter target in targetFighters)
-                //{
-                //    if (chosenSkillInfo.type == EffectType.Damage)
-                //        target.CurrentHP -= chosenSkillInfo.amount;
-                //    else if (chosenSkillInfo.type == EffectType.Heal)
-                //        target.CurrentHP += chosenSkillInfo.amount;
-                //}
-                //CheckForCasualties();
+                // TODO: Apply Different Effects After Deciding How To Choose Target for Damaging Skills
             }
         }
 
@@ -371,12 +322,6 @@ namespace GP7.Prodigy.Combat
 
             while (tempTurnQueue.TryDequeue(out Fighter queuedFighter))
             {
-                //if (queuedFighter.CurrentHP > 0) turnQueue.Enqueue(queuedFighter);
-                //else
-                //{
-                //    queuedFighter.IsDead = true;
-                //    Debug.Log($"{queuedFighter} fainted");
-                //}
                 if (!queuedFighter.IsDead && queuedFighter.CurrentHealth <= 0)
                 {
                     queuedFighter.IsDead = true;

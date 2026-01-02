@@ -7,8 +7,8 @@ namespace GP7.Prodigy.Combat
     {
         public EffectType Type;
         public string effectSummery;
-        public abstract float Apply(Fighter initiator, Fighter target);
-        protected float CalculateValue(Fighter initiator, Fighter targetFighter, SkillValueCalculationType calculationType, float value)
+        public abstract float Apply(IAbilityTarget initiator, IAbilityTarget target);
+        protected float CalculateValue(IAbilityTarget initiator, IAbilityTarget targetFighter, SkillValueCalculationType calculationType, float value)
         {
             switch (calculationType)
             {
@@ -40,7 +40,7 @@ namespace GP7.Prodigy.Combat
         public SkillValueCalculationType calculationType;
         public float value;
 
-        public override float Apply(Fighter initiator, Fighter target)
+        public override float Apply(IAbilityTarget initiator, IAbilityTarget target)
         {
             return target.ApplyDamage(CalculateValue(initiator, target, calculationType, value));
         }
@@ -52,7 +52,7 @@ namespace GP7.Prodigy.Combat
         public SkillValueCalculationType calculationType;
         public float value;
 
-        public override float Apply(Fighter initiator, Fighter target)
+        public override float Apply(IAbilityTarget initiator, IAbilityTarget target)
         {
             return target.ApplyHeal(CalculateValue(initiator, target, calculationType, value));
             //target.ApplyDamage(CalculateValue(initiator, target, calculationType, value));
@@ -66,9 +66,9 @@ namespace GP7.Prodigy.Combat
         public int numberOfTurns;
         public float value;
 
-        public override float Apply(Fighter initiator, Fighter target)
+        public override float Apply(IAbilityTarget initiator, IAbilityTarget target)
         {
-            target.ApplyStatusEffect(new StatusEffectHandler(numberOfTurns, stats, value));
+            target.ApplyStatusEffect(numberOfTurns, stats, value);
             return 0;
         }
     }

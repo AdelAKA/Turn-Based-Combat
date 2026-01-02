@@ -16,7 +16,7 @@ MonoBehaviour:
   - name: Heal Percentage
     identifier: 1
     condition:
-      rid: 9148782840227561617
+      rid: 7385112370287476864
     targetType: 1
     type: 2
     amount: 50
@@ -25,7 +25,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 9148782840227561617
-      type: {class: HealthConditionTrigger, ns: GP7.Prodigy.Combat, asm: Prodigy.Combat}
+    - rid: 7385112370287476864
+      type: {class: HealthConditionTrigger, ns: GP7.Prodigy.Combat, asm: CombatStructure}
       data:
-        HealthTriggerPercentage: 0.5
+        HealthTriggerPercentage: 0.2

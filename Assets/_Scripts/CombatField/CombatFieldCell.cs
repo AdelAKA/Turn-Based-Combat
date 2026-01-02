@@ -59,7 +59,6 @@ namespace GP7.Prodigy.Combat
 
         public void SwitchTargetSelectionMode(bool isSelectable)
         {
-            //col.enabled = isSelectable;
             selectButton.gameObject.SetActive(isSelectable);
             //selectionModeArrow.enabled = isSelectable;
         }

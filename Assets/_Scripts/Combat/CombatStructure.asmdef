@@ -1,12 +1,10 @@
 {
-    "name": "Prodigy.Combat.Editor",
+    "name": "CombatStructure",
     "rootNamespace": "",
     "references": [
-        "GUID:b0f0ddaef80200945ac4e4b3e234b2c1"
+        "GUID:6cb9a9627c4e3be41b2f2f67c8b251e3"
     ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

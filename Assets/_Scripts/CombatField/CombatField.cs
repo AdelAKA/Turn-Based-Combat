@@ -86,33 +86,24 @@ namespace GP7.Prodigy.Combat
 
         public FieldFighter GetFieldFighterByReference(Fighter fighter) => fieldFighters.FirstOrDefault(f => f.FighterReference == fighter);
 
-        public void MarkCurrentFighter(Fighter fighter)
+        public void MarkCurrentFighter(Fighter currentFighter)
         {
-            //foreach (FieldFighter fieldFighter in fieldFighters)
-            //{
-            //    fieldFighter.SwitchFighterTurnMark(fieldFighter.FighterReference == fighter);
-            //}
             foreach (var heroFieldCell in heroFieldCells)
             {
                 bool condition = heroFieldCell.FieldFighterReference != null
-                    && heroFieldCell.FieldFighterReference.FighterReference == fighter;
+                    && heroFieldCell.FieldFighterReference.FighterReference == currentFighter;
                 heroFieldCell.SwitchCurrentTurnMark(condition);
             }
             foreach (var monsterFieldCell in monsterFieldCells)
             {
                 bool condition = monsterFieldCell.FieldFighterReference != null
-                    && monsterFieldCell.FieldFighterReference.FighterReference == fighter;
+                    && monsterFieldCell.FieldFighterReference.FighterReference == currentFighter;
                 monsterFieldCell.SwitchCurrentTurnMark(condition);
             }
         }
 
         public void ShowPossibleTargets(Fighter initiator, List<Fighter> possibleTargets)
         {
-            //if (skillIndex == -1)
-            //{
-            //    WeaponsCollection.WeaponInfo weaponInfo = OfflineCombatManager.Instance.weaponsCollection.GetWeaponByName(initiator.HeldWeapon);
-            //}
-
             List<CombatFieldCell> allFieldCells = new List<CombatFieldCell>(monsterFieldCells);
             allFieldCells.AddRange(heroFieldCells);
 
@@ -124,12 +115,6 @@ namespace GP7.Prodigy.Combat
                     && possibleTargets.Contains(fieldCell.FieldFighterReference.FighterReference);
                 fieldCell.SwitchTargetSelectionMode(condition);
             }
-
-            //foreach (var monsterFieldCell in monsterFieldCells)
-            //{
-            //    //monsterFieldCell.SwitchTargetMark(monsterFieldCell.FighterReference != null && !monsterFieldCell.FighterReference.IsDead);
-            //    monsterFieldCell.SwitchTargetMarking(false);
-            //}
         }
 
         public void ShowAffectedTargets(List<Fighter> affectedTargets)
@@ -150,12 +135,6 @@ namespace GP7.Prodigy.Combat
 
         public void SelectTarget(FieldFighter target)
         {
-            //foreach (FieldFighter fieldFighter in fieldFighters)
-            //{
-            //    fieldFighter.SwitchTargetSelectionMode(false);
-            //}
-
-            // TODO: handle skills with multi target
             OfflineCombatManager.Instance.SelectTarget(target.FighterReference);
         }
 

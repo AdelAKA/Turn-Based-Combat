@@ -92,12 +92,12 @@ namespace GP7.Prodigy.Combat
                 QuickActionsCollection.QuickActionInfo healPotion = quickActionsCollection.GetQuickActionByIdentifier(QuickActionName.healingPotion);
                 QuickActionsCollection.QuickActionInfo damageBoost = quickActionsCollection.GetQuickActionByIdentifier(QuickActionName.DamgeBoostPotion);
 
-                hero = new HeroFighter(
+                hero = new Fighter(
                         index: 0,
                         new CombatFieldPos() { rowIndex = 1, columnIndex = 0, isLocal = true },
                         isLocalPlayer: true,
-                        maxHP: maxHP,
-                        maxMP: maxMP,
+                        maxHealth: maxHP,
+                        maxMana: maxMP,
                         speed: heroBaseStats.speed,
                         damage: heroBaseStats.damage + heroWeaponInfo.damage,
                         offHandStats: heroBaseStats.offHand,
@@ -105,8 +105,10 @@ namespace GP7.Prodigy.Combat
                         heldOffHand: heroOffhand,
                         skillNames: skillNames,
                         passiveSkillInfoList: passiveSkills,
-                        quickActionInfoList: new() { rock, healPotion, damageBoost }
+                        quickActionInfoList: new() { rock, healPotion, damageBoost },
+                        skillsCollection
                     );
+                hero.Name = "Player";
             }
 
             List<Fighter> monsters = new List<Fighter>();
@@ -131,11 +133,12 @@ namespace GP7.Prodigy.Combat
                     heldOffHand: OffHandName.None,
                     skillNames: monsterWeaponInfo.skillNames,
                     passiveSkillInfoList: new() { passiveSkillInfo },
-                    quickActionInfoList: new() { }
+                    quickActionInfoList: new() { },
+                    skillsCollection
                 );
                 monsters.Add(monster);
             }
-            Combat newCombat = new Combat(new List<Fighter>() { hero }, monsters);
+            Combat newCombat = new Combat(new List<Fighter>() { hero }, monsters, skillsCollection, quickActionsCollection, passiveSkillsCollection);
             return newCombat;
         }
 

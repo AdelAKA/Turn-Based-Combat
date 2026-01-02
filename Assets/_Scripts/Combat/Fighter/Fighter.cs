@@ -7,7 +7,7 @@ using System.Linq;
 namespace GP7.Prodigy.Combat
 {
     [Serializable]
-    public class Fighter
+    public class Fighter : IAbilityTarget
     {
         public UnityAction<float, float> OnHealthChanged;
         public UnityAction<float, float> OnManaChanged;
@@ -16,6 +16,8 @@ namespace GP7.Prodigy.Combat
 
         public UnityAction<StatusEffectName> OnStatusEffectApplied;
         public UnityAction<StatusEffectName, float> OnStatusEffectInvoked;
+
+        protected SkillsCollection skillsCollection;
 
         public Fighter(int index,
             CombatFieldPos position,
@@ -29,7 +31,8 @@ namespace GP7.Prodigy.Combat
             OffHandName heldOffHand,
             List<SkillName> skillNames,
             List<PassiveSkillsCollection.PassiveSkillInfo> passiveSkillInfoList,
-            List<QuickActionsCollection.QuickActionInfo> quickActionInfoList)
+            List<QuickActionsCollection.QuickActionInfo> quickActionInfoList,
+            SkillsCollection skillsCollection)
         {
             Index = index;
             Position = position;
@@ -55,6 +58,7 @@ namespace GP7.Prodigy.Combat
             {
                 QuickActions.Add(new QuickActionHandler(info));
             }
+            this.skillsCollection = skillsCollection;
         }
 
         public int Index { get; private set; }
@@ -108,10 +112,29 @@ namespace GP7.Prodigy.Combat
 
         public bool IsDead { get; set; }
         public bool IsStunned => StatusEffects.Any(s => s.StatusEffectName == StatusEffectName.Stun);
+        public bool CanConsume(QuickActionName target) => QuickActions.FirstOrDefault(q => q.QuickActionName == target).CanConsume();
 
         public void OnNewTurn()
         {
             IsQuickActionUsed = false;
+        }
+
+        public List<CombatPassiveMove> CheckForPassiveSkills()
+        {
+            List<CombatPassiveMove> combatPassiveMoves = new List<CombatPassiveMove>();
+
+            for (int i = 0; i < PassiveSkills.Count; i++)
+            {
+                if (PassiveSkills[i].CheckCondition())
+                {
+                    if(IsLocalPlayer)
+                        combatPassiveMoves.Add(new CombatPassiveMove(i, Index, -1));
+                    else
+                        combatPassiveMoves.Add(new CombatPassiveMove(i, -1, Index));
+                }
+            }
+
+            return combatPassiveMoves;
         }
 
         public void CheckStatusEffectsTurns()
@@ -145,13 +168,29 @@ namespace GP7.Prodigy.Combat
             return changeAmount;
         }
 
-        public void ApplyStatusEffect(StatusEffectHandler appliedStatusEffect)
+        public void ApplyStatusEffect(int numberOfTurns, StatusEffectName status, float value)
         {
+            var appliedStatusEffect = new StatusEffectHandler(numberOfTurns, status, value);
             StatusEffects.Add(appliedStatusEffect);
             if (appliedStatusEffect.StatusEffectName == StatusEffectName.DamageBoost)
                 percentageDamageModifier += appliedStatusEffect.Value;
             //constantDamageModifier += appliedStatsEffect.Value;
             OnStatusEffectApplied?.Invoke(appliedStatusEffect.StatusEffectName);
+        }
+
+        public QuickActionName InvokeQuickAction(int quickActionIndex)
+        {
+            QuickActionHandler InvokedQuickAction = QuickActions[quickActionIndex];
+            InvokedQuickAction.TryConsume();
+            IsQuickActionUsed = true;
+            return InvokedQuickAction.QuickActionName;
+        }
+
+        public PassiveSkillName InvokePassiveSkill(int passiveSkillIndex)
+        {
+            PassiveSkillHandler invokedPassiveSkill = PassiveSkills[passiveSkillIndex];
+            invokedPassiveSkill.isInvoked = true;
+            return invokedPassiveSkill.PassiveSkillName;
         }
 
         public void InvokeDPSstatusEffects()
@@ -186,5 +225,6 @@ namespace GP7.Prodigy.Combat
                 OnStatusEffectInvoked?.Invoke(item.Key, item.Value);
             }
         }
+
     }
 }
